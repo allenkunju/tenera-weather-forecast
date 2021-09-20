@@ -1,0 +1,7 @@
+version: "3"
+services:
+  web:
+    image: web-docker-image
+    container_name: "weather-service-web"
+    ports:
+      - 9090:8080
