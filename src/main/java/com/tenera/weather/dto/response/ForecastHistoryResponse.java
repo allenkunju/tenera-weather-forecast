@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 @Builder
-public class ForecastHistory {
-    int avg_temp;
+public class ForecastHistoryResponse {
+    double avg_temp;
     int avg_pressure;
     List<Forecast> history;
 }

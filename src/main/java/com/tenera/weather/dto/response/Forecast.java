@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Forecast {
-    int temp;
+    double temp;
     int pressure;
     boolean umbrella;
 }

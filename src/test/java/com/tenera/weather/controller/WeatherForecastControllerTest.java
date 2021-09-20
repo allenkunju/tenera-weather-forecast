@@ -1,7 +1,7 @@
 package com.tenera.weather.controller;
 
 import com.tenera.weather.dto.response.Forecast;
-import com.tenera.weather.dto.response.ForecastHistory;
+import com.tenera.weather.dto.response.ForecastHistoryResponse;
 import com.tenera.weather.service.WeatherForecastService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ class WeatherForecastControllerTest {
         this.mockMvc.perform(get("/current?location=Berlin")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("\"umbrella\": true")));
+                .andExpect(content().string(containsString("\"umbrella\":true")));
     }
 
     @Test
@@ -56,12 +56,12 @@ class WeatherForecastControllerTest {
     public void getForecastHistory() throws Exception {
         List<Forecast> history = new ArrayList<>();
         history.add(Forecast.builder().temp(6).pressure(1000).umbrella(true).build());
-        when(service.getForecastHistory(anyString())).thenReturn(ForecastHistory.builder().avg_temp(7).avg_pressure(1250).history(history).build());
+        when(service.getForecastHistory(anyString())).thenReturn(ForecastHistoryResponse.builder().avg_temp(7).avg_pressure(1250).history(history).build());
 
-        this.mockMvc.perform(get("/current?location=Berlin")
+        this.mockMvc.perform(get("/history?location=Berlin")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("\"avg_pressure\": 1250")));
+                .andExpect(content().string(containsString("\"avg_pressure\":1250")));
     }
 
 }
